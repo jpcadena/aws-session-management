@@ -1,0 +1,47 @@
+# Include any files or directories that you don't want to be copied to your
+# container here (e.g., local build artifacts, temporary files, etc.).
+#
+# For more help, visit the .dockerignore file reference guide at
+# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+
+# General system files
+**/.DS_Store
+
+# IDE specific
+**/.classpath
+**/.project
+**/.settings
+**/.vs
+**/.vscode
+**/*.*proj.user
+
+# Python specific
+**/.idea
+**/__pycache__
+**/.venv
+**/.mypy_cache
+**/.pytest_cache
+**/.ruff_cache
+
+# Docker specific
+**/.dockerignore
+**/Dockerfile*
+**/docker-compose*
+
+# Git specific
+**/.git
+**/.gitignore
+
+# Build and cache
+**/bin
+**/obj
+**/artifacts
+**/logs
+
+# Kubernetes and Helm specific
+**/charts
+
+# Development environment files
+**/.env
+**/secrets.dev.yaml
+**/values.dev.yaml

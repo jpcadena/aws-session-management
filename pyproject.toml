@@ -25,6 +25,8 @@ classifiers = [
     "Framework :: FastAPI",
     "Framework :: Pydantic",
     "Framework :: Pydantic :: 2",
+    "Framework :: AWS CDK",
+    "Framework :: AWS CDK :: 1",
     "Intended Audience :: Developers",
     "Intended Audience :: End Users/Desktop",
     "Intended Audience :: Information Technology",
@@ -45,6 +47,7 @@ classifiers = [
     "Topic :: File Formats",
     "Topic :: Internet",
     "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: Session",
     "Topic :: Scientific/Engineering",
     "Topic :: Scientific/Engineering :: Information Analysis",
     "Topic :: Software Development",
@@ -73,6 +76,8 @@ pytest = "^8.3.2"
 starlette = "^0.38.5"
 awscli = "^1.34.14"
 boto3 = "^1.35.14"
+email-validator = "^2.2.0"
+orjson = "^3.10.7"
 
 [build-system]
 requires = ["poetry-core"]
