@@ -6,7 +6,7 @@
 
 # Stage 1: Build Stage
 # Use a Python image and specify a non-root user.
-ARG PYTHON_VERSION=3.12.5
+ARG PYTHON_VERSION=3.12.6
 FROM python:${PYTHON_VERSION} AS base
 ARG UID=10001
 
@@ -140,5 +140,5 @@ USER appuser
 # Expose port
 EXPOSE 8080
 
-# Run the application with Gunicorn
-CMD ["gunicorn", "-w", "3", "-k", "uvicorn.workers.UvicornWorker", "-t", "120", "--threads", "2", "main:app", "--bind", "0.0.0.0:8080"]
+# Run the application with Uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--proxy-headers"]
