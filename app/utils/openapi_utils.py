@@ -120,6 +120,7 @@ def custom_openapi(app: FastAPI) -> dict[str, Any]:
         summary=app.state.init_settings.SUMMARY,
         description=app.state.init_settings.DESCRIPTION,
         routes=app.routes,
+        tags=app.state.init_settings.TAGS_METADATA,
         servers=[
             {
                 "url": app.state.settings.SERVER_URL,

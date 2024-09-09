@@ -2,8 +2,10 @@
 A module for init settings in the app.config package.
 """
 
+from datetime import date
 from pathlib import Path
 
+from fastapi.openapi.models import Example
 from pydantic import DirectoryPath
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -45,4 +47,41 @@ class InitSettings(BaseSettings):
     LICENSE_INFO: dict[str, str] = {
         "name": "MIT",
         "identifier": "MIT",
+    }
+    session_b64: str = convert_image_to_base64(
+        IMAGES_DIRECTORY.resolve() / "session.png"
+    )
+    TAGS_METADATA: list[dict[str, str]] = [
+        {
+            "name": "session",
+            "description": f"""Session management.\n\n<img src="{session_b64}"
+             width="150" height="100"/>""",
+        },
+    ]
+    SESSION_EXAMPLES: dict[str, Example] = {
+        "normal": {
+            "summary": "A normal example",
+            "description": "A **normal** user create object that works "
+            "correctly.",
+            "value": {
+                "user_id": "some_uuid",
+                "action": "some_action",
+            },
+        },
+        "converted": {
+            "summary": "An example with converted data",
+            "description": "FastAPI can convert `integers` to actual `strings`"
+            " automatically",
+            "value": {
+                "user_id": 1,
+                "action": "converted_action",
+            },
+        },
+        "invalid": {
+            "summary": "Invalid data is rejected with an error",
+            "value": {
+                "user_id": date(2004, 12, 31),
+                "action": True,
+            },
+        },
     }

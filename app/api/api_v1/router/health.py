@@ -8,6 +8,7 @@ from fastapi import APIRouter, status
 from fastapi.responses import ORJSONResponse
 from pydantic import PositiveInt
 
+from app.db.dynamodb import check_db_health, get_table
 from app.schemas.examples import health_example
 
 logger: logging.Logger = logging.getLogger(__name__)
@@ -31,5 +32,7 @@ async def check_health() -> ORJSONResponse:
         "status": "healthy",
     }
     status_code: PositiveInt = status.HTTP_200_OK
-    # TODO: Add the database health status check method
+    if not check_db_health(get_table()):
+        health_status["status"] = "unhealthy"
+        status_code = status.HTTP_503_SERVICE_UNAVAILABLE
     return ORJSONResponse(health_status, status_code=status_code)

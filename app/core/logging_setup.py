@@ -113,7 +113,7 @@ def _setup_file_handler(
 
 def setup_logging(
     init_settings: InitSettings,
-    log_level: PositiveInt = logging.ERROR,
+    log_level: PositiveInt = logging.DEBUG,
 ) -> None:
     """
     Initialize logging for the application
