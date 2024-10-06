@@ -46,7 +46,7 @@ USER root
 
 # Upgrade pip and install Poetry
 RUN python -m pip install --upgrade pip && \
-    pip install poetry==1.5.1
+    pip install poetry==1.8.3
 
 # Copy only the necessary files for installing dependencies
 COPY pyproject.toml poetry.lock* /tmp/
@@ -106,7 +106,7 @@ WORKDIR /aws-session-management
 FROM base_stage AS builder_stage
 
 # Install Poetry
-RUN python -m pip install --upgrade pip && pip install poetry==1.5.1
+RUN python -m pip install --upgrade pip && pip install poetry==1.8.3
 
 # Ensure that the local bin directory is in the PATH
 ENV PATH="/home/appuser/.local/bin:$PATH"

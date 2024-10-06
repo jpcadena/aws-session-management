@@ -12,7 +12,8 @@ health_example: dict[PositiveInt | str, dict[str, Any]] | None = {
             "application/json": {
                 "example": [
                     {
-                        "status": "healthy",
+                        "dynamodb": "healthy",
+                        "sqs": "healthy",
                     },
                 ],
             },
@@ -24,6 +25,15 @@ health_example: dict[PositiveInt | str, dict[str, Any]] | None = {
                 "example": [
                     {
                         "status": "unhealthy",
+                        "sqs": "unhealthy",
+                    },
+                    {
+                        "status": "healthy",
+                        "sqs": "unhealthy",
+                    },
+                    {
+                        "status": "unhealthy",
+                        "sqs": "healthy",
                     },
                 ],
             },
