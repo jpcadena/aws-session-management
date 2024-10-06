@@ -10,6 +10,7 @@ from pydantic import PositiveInt
 
 from app.db.dynamodb import check_db_health, get_table
 from app.schemas.examples import health_example
+from app.services.sqs import check_sqs_health
 
 logger: logging.Logger = logging.getLogger(__name__)
 router: APIRouter = APIRouter(prefix="/health", tags=["health"])
@@ -29,10 +30,14 @@ async def check_health() -> ORJSONResponse:
     \f
     """
     health_status: dict[str, str] = {
-        "status": "healthy",
+        "dynamodb": "healthy",
+        "sqs": "healthy",
     }
     status_code: PositiveInt = status.HTTP_200_OK
     if not check_db_health(get_table()):
-        health_status["status"] = "unhealthy"
+        health_status["dynamodb"] = "unhealthy"
+        status_code = status.HTTP_503_SERVICE_UNAVAILABLE
+    if not check_sqs_health():
+        health_status["sqs"] = "unhealthy"
         status_code = status.HTTP_503_SERVICE_UNAVAILABLE
     return ORJSONResponse(health_status, status_code=status_code)

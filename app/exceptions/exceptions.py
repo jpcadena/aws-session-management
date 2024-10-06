@@ -28,3 +28,19 @@ class DatabaseOperationError(HTTPException):
         super().__init__(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=detail
         )
+
+
+class SQSConnectionError(Exception):
+    """Raised when the SQS connection fails."""
+
+    def __init__(self, detail: str):
+        self.detail: str = detail
+        super().__init__(self.detail)
+
+
+class SQSSendMessageError(Exception):
+    """Raised when sending a message to SQS fails."""
+
+    def __init__(self, detail: str):
+        self.detail: str = detail
+        super().__init__(self.detail)

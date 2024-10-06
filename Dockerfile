@@ -6,7 +6,7 @@
 
 # Stage 1: Build Stage
 # Use a Python image and specify a non-root user.
-ARG PYTHON_VERSION=3.12.6
+ARG PYTHON_VERSION=3.12.7
 FROM python:${PYTHON_VERSION} AS base
 ARG UID=10001
 
@@ -86,8 +86,8 @@ EXPOSE 8080
 # Run the application
 # syntax=docker/dockerfile:1
 
-ARG PYTHON_VERSION=3.12.4
-FROM python:${PYTHON_VERSION} AS base
+ARG PYTHON_VERSION=3.12.7
+FROM python:${PYTHON_VERSION} AS base_stage
 
 # Create a non-privileged user and set permissions
 RUN adduser --disabled-password --gecos "" appuser && mkdir -p /aws-session-management && chown -R appuser:appuser /aws-session-management
@@ -103,7 +103,7 @@ USER appuser
 WORKDIR /aws-session-management
 
 # Install dependencies
-FROM base AS builder
+FROM base_stage AS builder_stage
 
 # Install Poetry
 RUN python -m pip install --upgrade pip && pip install poetry==1.5.1
@@ -119,7 +119,7 @@ WORKDIR /tmp
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 # Production Stage
-FROM base AS production
+FROM base_stage AS production_stage
 
 # Switch back to root to install system dependencies
 USER root
@@ -128,7 +128,7 @@ USER root
 RUN apt-get update -y && apt-get install -qy --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Copy over requirements and install Python packages
-COPY --from=builder /tmp/requirements.txt /aws-session-management/
+COPY --from=builder_stage /tmp/requirements.txt /aws-session-management/
 RUN pip install --no-cache-dir -r /aws-session-management/requirements.txt
 
 # Copy source code

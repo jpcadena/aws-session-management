@@ -13,6 +13,7 @@ from app.exceptions.exceptions import (
 )
 from app.schemas.session import SessionRequest, SessionResponse
 from app.services.session import process_session
+from app.services.sqs import send_sqs_message
 
 router: APIRouter = APIRouter(prefix="/session", tags=["session"])
 
@@ -46,6 +47,12 @@ async def handle_session(
     """
     try:
         response: SessionResponse = process_session(request)
+        message_body: dict[str, str] = {
+            "event_type": "SESSION_UPDATED",
+            "user_id": request.user_id,
+            "last_action": request.action,
+        }
+        send_sqs_message(message_body)
         return response
     except DatabaseConnectionError as db_conn_err:
         raise HTTPException(

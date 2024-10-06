@@ -24,7 +24,8 @@ def process_session(request: SessionRequest) -> SessionResponse:
     :type request: SessionRequest
     :return: The updated session response object.
     :rtype: SessionResponse
-    :raises DatabaseOperationError: If there is an error interacting with DynamoDB.
+    :raises DatabaseOperationError: If there is an error interacting with
+     DynamoDB.
     """
     table: Table = get_table()
     try:

@@ -6,9 +6,9 @@ license = "MIT"
 authors = ["Juan Pablo Cadena Aguilar <jpcadena@espol.edu.ec>"]
 maintainers = ["Juan Pablo Cadena Aguilar <jpcadena@espol.edu.ec>"]
 readme = "README.md"
-homepage = "https://github.com/jpcadena/aws-session-management"
+homepage = "https://pwmnjm94qt.us-east-2.awsapprunner.com"
 repository = "https://github.com/jpcadena/aws-session-management"
-documentation = "https://github.com/jpcadena/aws-session-management"
+documentation = "https://pwmnjm94qt.us-east-2.awsapprunner.com/docs"
 keywords = [
     "python",
     "backend",
@@ -20,7 +20,7 @@ keywords = [
     "uvicorn",
 ]
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 4 - Beta",
     "Environment :: Web Environment",
     "Framework :: FastAPI",
     "Framework :: Pydantic",
@@ -62,24 +62,24 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.12"
-fastapi = "^0.114.0"
-uvicorn = "^0.30.6"
-pydantic = "^2.9.1"
-pydantic-settings = "^2.4.0"
+fastapi = "^0.115.0"
+uvicorn = "^0.31.0"
+pydantic = "^2.9.2"
+pydantic-settings = "^2.5.2"
 python-dotenv = "^1.0.1"
 isort = "^5.13.2"
 black = "^24.8.0"
-ruff = "^0.6.4"
+ruff = "^0.6.9"
 mypy = "^1.11.2"
-pre-commit = "^3.8.0"
-pytest = "^8.3.2"
-starlette = "^0.38.5"
-awscli = "^1.34.14"
-boto3 = "^1.35.14"
+pre-commit = "^4.0.0"
+pytest = "^8.3.3"
+starlette = "^0.38.6"
+awscli = "^1.35.0"
+boto3 = "^1.35.34"
 email-validator = "^2.2.0"
 orjson = "^3.10.7"
 ujson = "^5.10.0"
-boto3-stubs = {extras = ["dynamodb", "essential"], version = "^1.35.14"}
+boto3-stubs = {extras = ["dynamodb", "essential"], version = "^1.35.34"}
 
 [build-system]
 requires = ["poetry-core"]

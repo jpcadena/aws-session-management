@@ -13,6 +13,7 @@ from pydantic import (
     PositiveInt,
     field_validator,
 )
+from pydantic_core import Url
 from pydantic_core.core_schema import ValidationInfo
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -59,6 +60,49 @@ class Settings(BaseSettings):
         description="AWS Region Code",
         pattern=r"^[a-z]{2}-[a-z]{4,9}-\d$",
     )
+    AWS_ACCOUNT_ID: PositiveInt = Field(
+        ...,
+        title="AWS Account ID",
+        description="AWS Account Identifier",
+    )
+    AWS_QUEUE_NAME: str = Field(
+        ...,
+        title="AWS Queue Name",
+        description="AWS SQS queue name",
+    )
+    SQS_QUEUE_URL: HttpUrl | None = None
+
+    @field_validator("SQS_QUEUE_URL", mode="before")
+    def assemble_queue_url(
+        cls,
+        v: str | None,
+        info: ValidationInfo,  # noqa: argument-unused
+    ) -> HttpUrl:
+        """
+        Assemble the Simple Queue Service connection as URL string
+
+        :param v: Variables to consider
+        :type v: str
+        :param info: The field validation info
+        :type info: ValidationInfo
+        :return: SQS URL string
+        :rtype: HttpUrl
+        """
+        if v:
+            return HttpUrl(v)
+        aws_account_id: PositiveInt | None = info.data.get("AWS_ACCOUNT_ID")
+        aws_region: str | None = info.data.get("AWS_REGION")
+        aws_queue_name: str | None = info.data.get("AWS_QUEUE_NAME")
+        if not (aws_account_id and aws_region and aws_queue_name):
+            raise ValueError(
+                "Missing necessary configuration to assemble SQS Queue URL"
+            )
+        url: Url = Url.build(
+            scheme="https",
+            host=f"sqs.{aws_region}.amazonaws.com",
+            path=f"{aws_account_id}/{aws_queue_name}",
+        )
+        return HttpUrl(str(url))
 
     CONTACT_NAME: str | None = None
     CONTACT_URL: AnyHttpUrl | None = None
