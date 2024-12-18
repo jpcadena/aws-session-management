@@ -62,24 +62,24 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.12"
-fastapi = "^0.115.2"
-uvicorn = "^0.32.0"
-pydantic = "^2.9.2"
-pydantic-settings = "^2.5.2"
+fastapi = "^0.115.6"
+uvicorn = "^0.34.0"
+pydantic = "^2.10.3"
+pydantic-settings = "^2.6.1"
 python-dotenv = "^1.0.1"
 isort = "^5.13.2"
 black = "^24.10.0"
-ruff = "^0.6.9"
-mypy = "^1.12.0"
+ruff = "^0.8.2"
+mypy = "^1.13.0"
 pre-commit = "^4.0.1"
-pytest = "^8.3.3"
-starlette = "^0.40.0"
-awscli = "^1.35.8"
-boto3 = "^1.35.42"
+pytest = "^8.3.4"
+starlette = "^0.41.3"
+awscli = "^1.36.24"
+boto3 = "^1.35.77"
 email-validator = "^2.2.0"
-orjson = "^3.10.7"
+orjson = "^3.10.12"
 ujson = "^5.10.0"
-boto3-stubs = {extras = ["dynamodb", "essential"], version = "^1.35.42"}
+boto3-stubs = {extras = ["dynamodb", "essential"], version = "^1.35.77"}
 
 [build-system]
 requires = ["poetry-core"]
