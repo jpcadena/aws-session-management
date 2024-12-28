@@ -5,7 +5,6 @@ description = "AWS Session Management"
 license = "MIT"
 authors = ["Juan Pablo Cadena Aguilar <jpcadena@espol.edu.ec>"]
 maintainers = ["Juan Pablo Cadena Aguilar <jpcadena@espol.edu.ec>"]
-readme = "README.md"
 homepage = "https://pwmnjm94qt.us-east-2.awsapprunner.com"
 repository = "https://github.com/jpcadena/aws-session-management"
 documentation = "https://pwmnjm94qt.us-east-2.awsapprunner.com/docs"
@@ -59,27 +58,28 @@ classifiers = [
     "Topic :: Text Processing :: Markup :: reStructuredText",
     "Typing :: Typed",
 ]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = "^0.115.6"
 uvicorn = "^0.34.0"
-pydantic = "^2.10.3"
-pydantic-settings = "^2.6.1"
+pydantic = "^2.10.4"
+pydantic-settings = "^2.7.0"
 python-dotenv = "^1.0.1"
 isort = "^5.13.2"
 black = "^24.10.0"
-ruff = "^0.8.2"
-mypy = "^1.13.0"
+ruff = "^0.8.4"
+mypy = "^1.14.0"
 pre-commit = "^4.0.1"
 pytest = "^8.3.4"
 starlette = "^0.41.3"
-awscli = "^1.36.24"
-boto3 = "^1.35.77"
+awscli = "^1.36.31"
+boto3 = "^1.35.90"
 email-validator = "^2.2.0"
 orjson = "^3.10.12"
 ujson = "^5.10.0"
-boto3-stubs = {extras = ["dynamodb", "essential"], version = "^1.35.77"}
+boto3-stubs = {extras = ["dynamodb", "essential"], version = "^1.35.90"}
 
 [build-system]
 requires = ["poetry-core"]
